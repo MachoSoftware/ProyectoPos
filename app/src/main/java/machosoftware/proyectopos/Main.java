@@ -10,6 +10,8 @@ public class Main extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        int lol= 10;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
