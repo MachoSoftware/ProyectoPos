@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Historial"
+            android:label="@string/title_activity_historial" >
+        </activity>
+        <activity
+            android:name=".AdaptadorHistorial"
+            android:label="@string/title_activity_adaptador_historial" >
+        </activity>
     </application>
 
 </manifest>

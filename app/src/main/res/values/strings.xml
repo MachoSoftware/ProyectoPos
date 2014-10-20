@@ -4,5 +4,8 @@
     <string name="app_name">ProyectoPos</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_historial_boletas">HistorialBoletas</string>
+    <string name="title_activity_adaptador_historial">AdaptadorHistorial</string>
+    <string name="title_activity_historial">Historial</string>
 
 </resources>

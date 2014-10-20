@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:id="@+id/textView">
+
+    <TableLayout
+        android:id="@+id/TableLayout01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:id="@+id/TableRow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/IdView"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/FechaView"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/IdView"
+                android:layout_toEndOf="@+id/IdView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/HoraView"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/FechaView"
+                android:layout_toEndOf="@+id/FechaView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/SubtotalView"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/HoraView"
+                android:layout_toEndOf="@+id/HoraView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/DescuentoView"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/SubtotalView"
+                android:layout_toEndOf="@+id/SubtotalView" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/TotalView"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/DescuentoView"
+                android:layout_toEndOf="@+id/DescuentoView" />
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>
