@@ -1,26 +1,30 @@
 package machosoftware.proyectopos;
 
 import android.app.Activity;
+import android.content.Intent;
+//import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-
-public class Main extends Activity {
+/**
+ * Menu principal.
+ * Created by Sebastian on 27-09-2014.
+ */
+public class MenuPrincipal extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        int lol= 10;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_menu_principal);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
         return true;
     }
 
@@ -34,5 +38,13 @@ public class Main extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    /**
+     * abre el inventario
+     * @param view
+     */
+    public void abreInventario(View view){
+        Intent intent = new Intent(this, Inventario.class);
+        startActivity(intent);
     }
 }
