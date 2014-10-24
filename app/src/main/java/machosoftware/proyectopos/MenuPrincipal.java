@@ -43,4 +43,14 @@ public class MenuPrincipal extends Activity {
         Intent intent = new Intent(this, Inventario.class);
         startActivity(intent);
     }
+
+    public void abreHistorial (View view) {
+        Intent intent = new Intent(this, Historial.class);
+        startActivity(intent);
+    }
+
+    public void abreVenta (View view) {
+        Intent intent = new Intent(this, Venta.class);
+        startActivity(intent);
+    }
 }

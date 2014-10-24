@@ -37,12 +37,12 @@
             android:label="@string/title_activity_historial" >
         </activity>
         <activity
-            android:name=".AdaptadorHistorial"
-            android:label="@string/title_activity_adaptador_historial" >
-        </activity>
-        <activity
             android:name=".Venta"
             android:label="@string/title_activity_venta" >
+        </activity>
+        <activity
+            android:name=".Catalogo"
+            android:label="@string/title_activity_catalogo" >
         </activity>
     </application>
 

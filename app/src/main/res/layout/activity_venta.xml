@@ -11,6 +11,63 @@
     <TextView
         android:text="@string/hello_world"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/idBoleta" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:id="@+id/botonCancelar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:singleLine="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirmar Venta"
+        android:id="@+id/buttonConfirmar"
+        android:layout_alignBottom="@+id/botonCancelar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Catálogo"
+        android:id="@+id/buttonAgregarCatalogo"
+        android:layout_above="@+id/botonCancelar"
+        android:onClick="agregarItem"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan Código"
+        android:id="@+id/buttonAgregarCódigo"
+        android:layout_alignTop="@+id/buttonAgregarCatalogo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total"
+        android:id="@+id/textViewTotal"
+        android:layout_above="@+id/buttonAgregarCatalogo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listViewItems"
+        android:layout_below="@+id/idBoleta"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/textViewTotal"
+        android:headerDividersEnabled="false" />
 
 </RelativeLayout>
