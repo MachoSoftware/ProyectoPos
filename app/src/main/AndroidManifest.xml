@@ -39,18 +39,7 @@
             android:name=".AdaptadorHistorial"
             android:label="@string/title_activity_adaptador_historial" >
         </activity>
-        <activity
-            android:name=".Categorias"
-            android:label="@string/title_activity_categorias" >
-        </activity>
-        <activity
-            android:name=".CategoriaAgregar"
-            android:label="@string/title_activity_categoria_agregar" >
-        </activity>
-        <activity
-            android:name=".Items"
-            android:label="@string/title_activity_items" >
-        </activity>
+
     </application>
 
 </manifest>
