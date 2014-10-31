@@ -40,7 +40,7 @@ public class Inventario extends Activity {
      * @param view
      */
     public void abreCategorias(View view){
-        Intent intent = new Intent(this, Categorias.class);
+        Intent intent = new Intent(this, Inventario_Categorias.class);
         startActivity(intent);
     }
 
@@ -49,7 +49,7 @@ public class Inventario extends Activity {
      * @param view
      */
     public void abreItems(View view){
-        Intent intent = new Intent(this, Items.class);
+        Intent intent = new Intent(this, Inventario_Items.class);
         startActivity(intent);
     }
 }

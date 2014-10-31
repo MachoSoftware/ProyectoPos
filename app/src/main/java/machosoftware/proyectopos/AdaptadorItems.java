@@ -29,18 +29,12 @@ public class AdaptadorItems<String> extends ArrayAdapter<String> {
         //genera la vista de la lista...
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.forma_item, parent, false);
-        //conecta el textView del XML de las categorias...
-        TextView textView = (TextView) rowView.findViewById(R.id.nombreItem);
-        //setea el string del XML de la categoria.
+        //conecta el textView del XML de las item...
+        TextView textView = (TextView) rowView.findViewById(R.id.nombre_item);
+        //setea el string del XML de la item.
         textView.setText(values[position].toString());
 
-        //no esta terminado! faltan imagenes!
-        /*
-        //aqui debemos conectar con el imageview del XML de las categoria..
-        iConosCategorias = (ImageView)findViewById(R.id.mImageView);
-        //aqui debe setear la imagen del XML de las categorias...
-        iConosCategorias.setImageResource(R.drawable.your_image_name);
-        */
+
         return rowView;
     }
 }

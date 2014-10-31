@@ -37,8 +37,8 @@
                 android:layout_weight="3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/nombreCategoria"
-                android:hint="nombre_item" />
+                android:id="@+id/nombreItem"
+                android:hint="nombre producto" />
 
         </LinearLayout>
 
@@ -54,32 +54,23 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/iconoCategoria"
+                android:text="@string/icono_item"
                 android:id="@+id/textView2" />
 
             <EditText
                 android:layout_weight="3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/iconoCategoria"
+                android:id="@+id/iconoItem"
                 android:hint="icono" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_weight="1"
+        <Spinner
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal">
-
-            <CheckBox
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/checkBoxVisibleCategoria"
-                android:id="@+id/checkBoxCategoria" />
-
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner3"
+            android:layout_gravity="center_horizontal" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -95,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:text="cancelar"
                 android:id="@+id/button2"
-                android:onClick="botonAgregarCategoriaCancelar"
+                android:onClick="botonAgregarItemsCancelar"
                 android:layout_gravity="center_horizontal" />
 
             <Button
@@ -104,9 +95,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="agregar"
-                android:id="@+id/categoriaBotonAgregar"
+                android:id="@+id/ItemsBotonAgregar"
                 android:layout_gravity="center_horizontal"
-                android:onClick="botonAgregarCategoriaAgregar"
+                android:onClick="botonAgregarItemsAgregar"
                 />
 
         </LinearLayout>

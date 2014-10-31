@@ -14,7 +14,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_marginLeft="10dp"
         android:text="Elemento"
-        android:id="@+id/nombreItem"
+        android:id="@+id/nombre_item"
         android:background="#fff0f0f0" />
 
     <Button

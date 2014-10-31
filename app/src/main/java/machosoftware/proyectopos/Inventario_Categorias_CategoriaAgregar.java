@@ -17,7 +17,7 @@ import android.widget.Toast;
  * Created by Sebastian on 27-09-2014.
  * estado: NO terminada.
  */
-public class CategoriaAgregar extends Activity {
+public class Inventario_Categorias_CategoriaAgregar extends Activity {
 
 
     @Override

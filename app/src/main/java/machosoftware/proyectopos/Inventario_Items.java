@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -14,39 +15,58 @@ import java.util.ArrayList;
 import machosoftware.proyectopos.Interfaces.IConstantes;
 
 
-public class Items extends Activity implements IConstantes {
+public class Inventario_Items extends Activity implements IConstantes {
 
-    private final int CODIGO_REQUEST = 2502;
+    private final int CODIGO_REQUEST = 25023;
 
     //Aqui pongo un arrayDinamico para poblar con items de la BD
-    private ArrayList<String> nombresItems;
+    private ArrayList<Item> productos;
 
     /**
      * Hace el query a la bd, seleccionando los nombres del item.
      */
     private void refrescarLista(){
+
+        //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+        //ESTO VA A MORIR...
+        //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         PosBaseDatos miBase = new PosBaseDatos(this, NOMBRE_BD, null, 1);
+
         SQLiteDatabase db = miBase.getReadableDatabase();
         //####################################################
         //query no final, hay que esperar db de carlos!
         Cursor c = db.rawQuery(" SELECT nombre FROM categoria", null);
         //####################################################
         //nuevo arraylist
-        nombresItems = new ArrayList<String>();
+
+        productos = new ArrayList<Item>();
         //Nos aseguramos de que existe al menos un registro...
         if (c.moveToFirst()) {
             //Recorremos el cursor hasta que no haya más registros
             do {
-                nombresItems.add(c.getString(0));
+
+                Item item = new Item();
+                //obtenemos nombre del item
+                item.setNombre_item(c.getString(0));
+                //obtenemos icono del item
+                //item.setIcono ??
+                //obtenemos otras cosas
+                //...
+                productos.add(item);
             } while(c.moveToNext());
         }
+        //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+        //fin morir
+        //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
         //creamos un array tipo string para que lo lea el Adaptador...
-        String[] misArraysStrings = new String[nombresItems.size()];
-        //obtenemos cada string...
-        for(int i=0; i< nombresItems.size(); i++){
-            misArraysStrings[i] = nombresItems.get(i);
+        String[] misArraysStrings = new String[productos.size()];
+        //obtenemos cada string de nombres...
+        for(int i=0; i< productos.size(); i++){
+            misArraysStrings[i] = productos.get(i).getNombre_item();
         }
+        //obtenemos cada codigo del icono
+        //for...
 
         //aqui el adaptador crea la lista con las categorias usando el layout que se ha creado...
         AdaptadorItems<String> adapter = new AdaptadorItems<String>(this, misArraysStrings);
@@ -58,7 +78,7 @@ public class Items extends Activity implements IConstantes {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_items);
+        setContentView(R.layout.activity_inventario_items);
         //muestra lista
         refrescarLista();
     }
@@ -94,5 +114,16 @@ public class Items extends Activity implements IConstantes {
                  ***/
         //aqui refrescamos la viewList haciendo query a la bd
         refrescarLista();
+    }
+
+    /**
+     * Llamada por onClick al agregar una categoria
+     * @param view
+     */
+    public void agregaItem(View view){
+
+        Intent intent = new Intent(this, Inventario_Items_ItemsAgregar.class);
+        //ahora hacemos un lanzamiento con espera de resultado...
+        startActivityForResult(intent, CODIGO_REQUEST);
     }
 }

@@ -15,16 +15,16 @@ import java.util.ArrayList;
 import machosoftware.proyectopos.Interfaces.IConstantes;
 
 /**
- * Categorias del pos.
+ * Inventario_Categorias del pos.
  * Created by Sebastian on 27-09-2014.
  * estado: NO terminada.
  */
-public class Categorias extends Activity implements IConstantes{
+public class Inventario_Categorias extends Activity implements IConstantes{
 
     private final int CODIGO_REQUEST = 2501;
 
-    //Aqui pongo un arrayDinamico para poblar con categorias de la BD
-    private ArrayList<String> nombresCategorias;
+    //array dinamico de categorias para poblar con la info de la db
+    private ArrayList<Categoria> categorias;
     //Aqui pongo un arrayDinamico para poblar con categorias de la BD
     private ArrayList<String> idIconos = new ArrayList<String>();
 
@@ -39,22 +39,32 @@ public class Categorias extends Activity implements IConstantes{
         PosBaseDatos miBase = new PosBaseDatos(this, NOMBRE_BD, null, 1);
         SQLiteDatabase db = miBase.getReadableDatabase();
         Cursor c = db.rawQuery(" SELECT nombre FROM categoria", null);
-        //nuevo arraylist
-        nombresCategorias = new ArrayList<String>();
+        //se instancia la lista de objetos de categoria
+        categorias = new ArrayList<Categoria>();
         //Nos aseguramos de que existe al menos un registro...
         if (c.moveToFirst()) {
             //Recorremos el cursor hasta que no haya más registros
             do {
-                nombresCategorias.add(c.getString(0));
+
+                Categoria categ = new Categoria();
+                //obtenemos nombre de la categoria
+                categ.setNombre_categoria(c.getString(0));
+                //obtenemos icono de la categoria
+                //item.setIcono ??
+                //obtenemos otras cosas
+                //...
+                categorias.add(categ);
             } while(c.moveToNext());
         }
 
         //creamos un array tipo string para que lo lea el Adaptador...
-        String[] misArraysStrings = new String[nombresCategorias.size()];
+        String[] misArraysStrings = new String[categorias.size()];
         //obtenemos cada string...
-        for(int i=0; i< nombresCategorias.size(); i++){
-            misArraysStrings[i] = nombresCategorias.get(i);
+        for(int i=0; i< categorias.size(); i++){
+            misArraysStrings[i] = categorias.get(i).getNombre_categoria();
         }
+        //obtenemos cada codigo del icono
+        //for...
 
         //aqui el adaptador crea la lista con las categorias usando el layout que he creado...
         AdaptadorCategorias<String> adapter = new AdaptadorCategorias<String>(this, misArraysStrings);
@@ -75,7 +85,7 @@ public class Categorias extends Activity implements IConstantes{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_categorias);
+        setContentView(R.layout.activity_inventario_categorias);
         //hace el query a la bd
         refrescarLista();
     }
@@ -105,7 +115,7 @@ public class Categorias extends Activity implements IConstantes{
      */
     public void agregaCategoria(View view){
 
-        Intent intent = new Intent(this, CategoriaAgregar.class);
+        Intent intent = new Intent(this, Inventario_Categorias_CategoriaAgregar.class);
         //ahora hacemos un lanzamiento con espera de resultado...
         startActivityForResult(intent, CODIGO_REQUEST);
     }

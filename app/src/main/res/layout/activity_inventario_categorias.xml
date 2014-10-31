@@ -23,7 +23,7 @@
         android:layout_weight="1"
         android:layout_height="0dp"
         android:text="+\nAgregar"
-        android:id="@+id/botonAgregar"
+        android:id="@+id/botonAgregarCategorias"
         android:onClick="agregaCategoria"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>
