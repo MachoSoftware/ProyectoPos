@@ -1,7 +1,6 @@
 package machosoftware.proyectopos;
 
 /**
- * Comentario asdasdsadadasdas
  * Created by Sebastian on 30-10-2014.
  */
 public class Boleta {
