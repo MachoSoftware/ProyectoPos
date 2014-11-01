@@ -1,26 +1,24 @@
 package machosoftware.proyectopos;
 
 import android.app.Activity;
-import android.content.Intent;
-//import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-public class MenuPrincipal extends Activity {
+
+public class Catalogo extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_principal);
+        setContentView(R.layout.activity_catalogo);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        getMenuInflater().inflate(R.menu.catalogo, menu);
         return true;
     }
 
@@ -34,23 +32,5 @@ public class MenuPrincipal extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-    /**
-     * abre el inventario
-     * @param view
-     */
-    public void abreInventario(View view){
-        Intent intent = new Intent(this, Inventario.class);
-        startActivity(intent);
-    }
-
-    public void abreHistorial (View view) {
-        Intent intent = new Intent(this, Historial.class);
-        startActivity(intent);
-    }
-
-    public void abreVenta (View view) {
-        Intent intent = new Intent(this, Venta.class);
-        startActivity(intent);
     }
 }

@@ -1,26 +1,38 @@
 package machosoftware.proyectopos;
 
 import android.app.Activity;
-import android.content.Intent;
-//import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
-public class MenuPrincipal extends Activity {
+import java.util.ArrayList;
+
+
+public class Venta extends Activity {
+
+    ArrayList<VentaItem> ListaItems = new ArrayList<VentaItem>();
+    ListView itemsListView;
+    AdaptadorVenta adaptadorLista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_principal);
+        setContentView(R.layout.activity_venta);
+
+        adaptadorLista = new AdaptadorVenta(this, ListaItems);
+        itemsListView = (ListView) findViewById(R.id.listViewItems);
+        itemsListView.setAdapter(adaptadorLista);
+
+        refrescarLista();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        getMenuInflater().inflate(R.menu.venta, menu);
         return true;
     }
 
@@ -35,22 +47,17 @@ public class MenuPrincipal extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-    /**
-     * abre el inventario
-     * @param view
-     */
-    public void abreInventario(View view){
-        Intent intent = new Intent(this, Inventario.class);
-        startActivity(intent);
+
+    public void refrescarLista() {
+        adaptadorLista.notifyDataSetChanged();
     }
 
-    public void abreHistorial (View view) {
-        Intent intent = new Intent(this, Historial.class);
-        startActivity(intent);
+    public void agregarItem(View view) {
+        ListaItems.add(new VentaItem("Item", 10, 990990, 10));
+        refrescarLista();
     }
 
-    public void abreVenta (View view) {
-        Intent intent = new Intent(this, Venta.class);
-        startActivity(intent);
+    public void confirmarVenta(View view) {
+
     }
 }
