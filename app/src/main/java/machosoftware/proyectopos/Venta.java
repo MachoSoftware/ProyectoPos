@@ -56,4 +56,8 @@ public class Venta extends Activity {
         ListaItems.add(new VentaItem("Item", 10, 990990, 10));
         refrescarLista();
     }
+
+    public void confirmarVenta(View view) {
+
+    }
 }

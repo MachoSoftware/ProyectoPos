@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:text="Confirmar Venta"
         android:id="@+id/buttonConfirmar"
+        android:onClick="confirmarVenta"
         android:layout_alignBottom="@+id/botonCancelar"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
