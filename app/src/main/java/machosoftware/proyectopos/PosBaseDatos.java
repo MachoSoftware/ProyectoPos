@@ -1,8 +1,13 @@
 package machosoftware.proyectopos;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 /**
  * Crea y modifica base de datos, con informacion del pos.
@@ -13,6 +18,8 @@ public class PosBaseDatos extends SQLiteOpenHelper {
 
     // Para el log cat
     private static final String LOG = "BDGESTOR";
+
+
 
     // Version BD
     private static final int DATABASE_VERSION = 1;
@@ -66,35 +73,33 @@ public class PosBaseDatos extends SQLiteOpenHelper {
     private static final String KEY_BOLETA_DETALLE_TOTAL = "boleta_detalle_total";
 
     // sentencias de creacion : item
-
     private static final String CREATE_TABLE_ITEM ="CREATE TABLE "+ TABLA_ITEM +
-            "(" + KEY_ID_ITEM + "INTEGER PRIMARY KEY autoincrement," + KEY_ID_CAT1 + "INTEGER,"
-            + KEY_ID_CAT2 + "INTEGER," + KEY_ID_CAT3 + "INTEGER," + KEY_NOMBRE_ITEM + "TEXT,"
-            + KEY_ICONO_ITEM + "TEXT," + KEY_TIPO + "INTEGER," + KEY_PRECIO + "INTEGER,"
-            + KEY_STOCK_ACTUAL + "INTEGER," + KEY_STOCK_OPTIMO + "INTEGER," + KEY_STOCK_ALERTA + "INTEGER)";
+            " ( " + KEY_ID_ITEM + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_ID_CAT1 + " INTEGER,"
+            + KEY_ID_CAT2 + " INTEGER," + KEY_ID_CAT3 + " INTEGER," + KEY_NOMBRE_ITEM + " TEXT,"
+            + KEY_ICONO_ITEM + " TEXT," + KEY_TIPO + " INTEGER," + KEY_PRECIO + " INTEGER,"
+            + KEY_STOCK_ACTUAL + " INTEGER," + KEY_STOCK_OPTIMO + " INTEGER," + KEY_STOCK_ALERTA + " INTEGER)";
 
     // sentencias de creacion : categoria
-
-    private static final String CREATE_TABLE_CATEGORIA ="CREATE TABLE" + TABLA_CATEGORIA +
-            "(" + KEY_ID_CATEGORIA + "INTEGER PRIMARY KEY autoincrement," + KEY_NOMBRE_CATEGORIA + "TEXT,"
-            + KEY_ICONO_CATEGORIA + "TEXT," + KEY_DESCRIPCION + "TEXT," + KEY_CATEGORIA_VISIBILIDAD+ "INTEGER)";
+    private static final String CREATE_TABLE_CATEGORIA ="CREATE TABLE " + TABLA_CATEGORIA +
+            "( " + KEY_ID_CATEGORIA + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NOMBRE_CATEGORIA + " TEXT,"
+            + KEY_ICONO_CATEGORIA + " TEXT," + KEY_DESCRIPCION + " TEXT," + KEY_CATEGORIA_VISIBILIDAD+ " INTEGER)";
 
     // sentencias de creacion : boleta
     // FECHA Y HORA SON TRATADOS COMO TEXT, PROXIMA MIGRACION A DATATIME O DATE
 
-    private static final String CREATE_TABLE_BOLETA ="CREATE TABLE" + TABLA_BOLETA +
-            "(" + KEY_ID_BOLETA + "INTEGER PRIMARY KEY autoincrement," + KEY_FECHA + "TEXT,"
-            + KEY_HORA + "TEXT," + KEY_BOLETA_SUBTOTAL + "INTEGER," + KEY_BOLETA_TOTAL + "INTEGER,"
-            + KEY_DESCUENTOTOTAL + "INTEGER,"+ KEY_BOLETA_VISIBILIDAD + "INTEGER)";
+    private static final String CREATE_TABLE_BOLETA ="CREATE TABLE " + TABLA_BOLETA +
+            " ( " + KEY_ID_BOLETA + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_FECHA + " TEXT,"
+            + KEY_HORA + " TEXT," + KEY_BOLETA_SUBTOTAL + " INTEGER," + KEY_BOLETA_TOTAL + " INTEGER,"
+            + KEY_DESCUENTOTOTAL + " INTEGER,"+ KEY_BOLETA_VISIBILIDAD + " INTEGER)";
 
 
     // sentencias de creacion : boleta_detalle
     // FALTAAAAAAAAAAAAAAAAA CLAVE FOREANEAS
     // FALTAAAAAAAAA CLAVE FOREANEAS
 
-    private static final String CREATE_TABLE_BOLETA_DETALLE ="CREATE TABLE" + TABLA_BOLETA_DETALLE +
-            "(" + KEY_DETALLE_ID_BOLETA + "INTEGER," + KEY_DETALLE_ID_ITEM+ "INTEGER," + KEY_CANTIDAD + "INTEGER,"
-            + KEY_BOLETA_DETALLE_SUBTOTAL + "INTEGER," + KEY_DESCUENTO + "INTEGER," + KEY_BOLETA_DETALLE_TOTAL + "INTEGER)";
+    private static final String CREATE_TABLE_BOLETA_DETALLE ="CREATE TABLE " + TABLA_BOLETA_DETALLE +
+            " ( " + KEY_DETALLE_ID_BOLETA + " INTEGER," + KEY_DETALLE_ID_ITEM+ " INTEGER," + KEY_CANTIDAD + " INTEGER,"
+            + KEY_BOLETA_DETALLE_SUBTOTAL + " INTEGER," + KEY_DESCUENTO + " INTEGER," + KEY_BOLETA_DETALLE_TOTAL + " INTEGER)";
 
 
 
@@ -183,7 +188,7 @@ public class PosBaseDatos extends SQLiteOpenHelper {
 
    //  Funciones varias- CRUD(Create, Read, Update, Delete)
     // agregar categoria
-    /*
+
     public void agregarCategoria (Categoria categoria) {
         SQLiteDatabase BD = this.getWritableDatabase();
 
@@ -197,7 +202,30 @@ public class PosBaseDatos extends SQLiteOpenHelper {
         BD.insert(TABLA_CATEGORIA, null, values);
         BD.close(); // siempre cerrar la bd
     }
-*/
+     public ArrayList<Categoria> obtenerCategorias () {
+         ArrayList<Categoria> categorias = new ArrayList<Categoria>(); // array
+         String Query = "SELECT * FROM " + TABLA_CATEGORIA ; //  query para rescata all
+
+         Log.e(LOG, Query);
+         SQLiteDatabase BD = this.getReadableDatabase();
+         Cursor c = BD.rawQuery(Query, null);
+
+         // loop sobRE Cada respuesta
+         if (c.moveToFirst()){
+            do {
+                Categoria categoria = new Categoria();
+                categoria.setId_Categoria(c.getInt((c.getColumnIndex(KEY_ID_CATEGORIA))));
+                categoria.setNombre_categoria(c.getString((c.getColumnIndex(KEY_NOMBRE_CATEGORIA))));
+                categoria.setIcono_categoria(c.getString((c.getColumnIndex(KEY_ICONO_CATEGORIA))));
+                categoria.setDescripcion(c.getString((c.getColumnIndex(KEY_DESCRIPCION))));
+                categoria.setVisibilidad(c.getInt((c.getColumnIndex(KEY_CATEGORIA_VISIBILIDAD))));
+
+                categorias.add(categoria);
+
+            } while(c.moveToNext());
+         }
+         return categorias;
+     }
 }
 
 

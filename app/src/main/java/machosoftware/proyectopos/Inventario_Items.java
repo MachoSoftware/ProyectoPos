@@ -26,7 +26,7 @@ public class Inventario_Items extends Activity implements IConstantes {
      * Hace el query a la bd, seleccionando los nombres del item.
      */
     private void refrescarLista(){
-
+/*
         //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         //ESTO VA A MORIR...
         //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -39,7 +39,7 @@ public class Inventario_Items extends Activity implements IConstantes {
         //####################################################
         //nuevo arraylist
 
-        productos = new ArrayList<Item>();
+        productos = miBase.obtenerItems();
         //Nos aseguramos de que existe al menos un registro...
         if (c.moveToFirst()) {
             //Recorremos el cursor hasta que no haya más registros
@@ -73,6 +73,7 @@ public class Inventario_Items extends Activity implements IConstantes {
         ListView listView = (ListView) findViewById(R.id.listaItems);
         listView.setAdapter(adapter);
         db.close();
+        */
     }
 
     @Override
