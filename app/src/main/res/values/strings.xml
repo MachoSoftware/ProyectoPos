@@ -27,5 +27,7 @@
     //items.aregar
     <string name="nombre_item">Nombre:</string>
     <string name="icono_item">Icono:</string>
+    <string name="title_activity_venta">Venta</string>
+    <string name="title_activity_catalogo">Catalogo</string>
 
 </resources>

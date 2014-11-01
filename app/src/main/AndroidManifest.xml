@@ -40,6 +40,14 @@
             android:name=".Inventario_Items_ItemsAgregar"
             android:label="@string/title_activity_items_agregar" >
         </activity>
+        <activity
+            android:name=".Venta"
+            android:label="@string/title_activity_venta" >
+        </activity>
+        <activity
+            android:name=".Catalogo"
+            android:label="@string/title_activity_catalogo" >
+        </activity>
     </application>
 
 </manifest>
