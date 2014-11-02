@@ -55,6 +55,7 @@ public class Historial extends Activity {
     //con el criterio de busqueda definido en la clase (OrdenadoPor, OrdenAscendente)
     public void refrescarLista() {
 
+        Boletas.clear();
         adaptadorLista.notifyDataSetChanged();
         PosBaseDatos databaseGestor = new PosBaseDatos(getApplicationContext());
         Boletas.addAll(databaseGestor.obtenerBoletas(ordenadoPor, ordenAscendente, mostrarOcultas));
@@ -63,8 +64,6 @@ public class Historial extends Activity {
 
     //Agregar boleta es un método para pruebas, debe ser eliminado cuando esté implementado el sistema de ventas
     public void agregarBoleta(View view) {
-
-        Boletas.clear();
         PosBaseDatos databaseGestor = new PosBaseDatos(getApplicationContext());
         Boleta BoletaPrueba = new Boleta();
         BoletaPrueba.setVisibilidad(1);
