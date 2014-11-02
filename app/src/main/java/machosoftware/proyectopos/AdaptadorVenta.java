@@ -17,7 +17,7 @@ public class AdaptadorVenta extends ArrayAdapter<VentaItem>{
     private final ArrayList<VentaItem> listaItems;
 
     public AdaptadorVenta(Context context, ArrayList<VentaItem> listaItems) {
-        super(context, R.layout.elemento_historial, listaItems);
+        super(context, R.layout.elemento_venta, listaItems);
         this.context = context;
         this.listaItems = listaItems;
     }
