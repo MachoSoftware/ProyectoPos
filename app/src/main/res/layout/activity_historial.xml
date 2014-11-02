@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:text="Id"
                 android:id="@+id/OrderById"
-                android:tag="Id"
+                android:tag="id_boleta"
                 android:onClick="OrderBy"
                 android:layout_column="0" />
 
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:text="Fecha"
                 android:id="@+id/OrderByFecha"
-                android:tag="Fecha"
+                android:tag="fecha"
                 android:onClick="OrderBy"
                 android:layout_column="1" />
 
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:text="Hora"
                 android:id="@+id/OrderByHora"
-                android:tag="Hora"
+                android:tag="hora"
                 android:onClick="OrderBy"
                 android:layout_column="2" />
 
@@ -81,9 +81,9 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SubTotal"
+                android:text="Subtotal"
                 android:id="@+id/OrderBySubtotal"
-                android:tag="Subtotal"
+                android:tag="boleta_subtotal"
                 android:onClick="OrderBy"
                 android:layout_column="3" />
 
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:text="Dcto"
                 android:id="@+id/OrderByDescuento"
-                android:tag="Descuento"
+                android:tag="descuentototal"
                 android:onClick="OrderBy"
                 android:layout_column="4" />
 
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:text="Total"
                 android:id="@+id/OrderByTotal"
-                android:tag="Total"
+                android:tag="boleta_total"
                 android:onClick="OrderBy"
                 android:layout_column="5" />
         </TableRow>

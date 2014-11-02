@@ -7,6 +7,7 @@ public class Boleta {
 
     private int id_boleta;
     private String fecha;
+    private String hora;
     private int subtotal;
     private int total;
     private int descuento_total;
@@ -31,6 +32,10 @@ public class Boleta {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+    public String getHora() { return hora; }
+
+    public void setHora(String hora) { this.hora = hora; }
 
     public int getSubtotal() {
         return subtotal;

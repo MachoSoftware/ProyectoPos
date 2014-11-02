@@ -202,7 +202,8 @@ public class PosBaseDatos extends SQLiteOpenHelper {
         BD.insert(TABLA_CATEGORIA, null, values);
         BD.close(); // siempre cerrar la bd
     }
-     public ArrayList<Categoria> obtenerCategorias () {
+
+    public ArrayList<Categoria> obtenerCategorias () {
          ArrayList<Categoria> categorias = new ArrayList<Categoria>(); // array
          String Query = "SELECT * FROM " + TABLA_CATEGORIA ; //  query para rescata all
 
@@ -214,18 +215,87 @@ public class PosBaseDatos extends SQLiteOpenHelper {
          if (c.moveToFirst()){
             do {
                 Categoria categoria = new Categoria();
-                categoria.setId_Categoria(c.getInt((c.getColumnIndex(KEY_ID_CATEGORIA))));
-                categoria.setNombre_categoria(c.getString((c.getColumnIndex(KEY_NOMBRE_CATEGORIA))));
-                categoria.setIcono_categoria(c.getString((c.getColumnIndex(KEY_ICONO_CATEGORIA))));
-                categoria.setDescripcion(c.getString((c.getColumnIndex(KEY_DESCRIPCION))));
-                categoria.setVisibilidad(c.getInt((c.getColumnIndex(KEY_CATEGORIA_VISIBILIDAD))));
+                categoria.setId_Categoria(c.getInt(c.getColumnIndex(KEY_ID_CATEGORIA)));
+                categoria.setNombre_categoria(c.getString(c.getColumnIndex(KEY_NOMBRE_CATEGORIA)));
+                categoria.setIcono_categoria(c.getString(c.getColumnIndex(KEY_ICONO_CATEGORIA)));
+                categoria.setDescripcion(c.getString(c.getColumnIndex(KEY_DESCRIPCION)));
+                categoria.setVisibilidad(c.getInt(c.getColumnIndex(KEY_CATEGORIA_VISIBILIDAD)));
 
                 categorias.add(categoria);
 
             } while(c.moveToNext());
          }
+
+         BD.close();
+         c.close();
+
          return categorias;
      }
+
+    public ArrayList<Boleta> obtenerBoletas(String ordenadoPor, boolean ordenAscendente, boolean mostrarOcultas) {
+
+        ArrayList<Boleta> boletas = new ArrayList<Boleta>();
+
+        SQLiteDatabase BD = this.getReadableDatabase();
+        Cursor cursor;
+
+        if (ordenAscendente)
+            cursor = BD.rawQuery("SELECT * FROM " + TABLA_BOLETA + " ORDER BY " + ordenadoPor + " DESC", null);
+        else
+            cursor = BD.rawQuery("SELECT * FROM " + TABLA_BOLETA + " ORDER BY " + ordenadoPor + " ASC", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                if (!mostrarOcultas) {
+                    if (cursor.getInt(cursor.getColumnIndex(KEY_BOLETA_VISIBILIDAD)) == 1) {
+                        Boleta boleta = new Boleta();
+
+                        boleta.setId_boleta(cursor.getInt(cursor.getColumnIndex(KEY_ID_BOLETA)));
+                        boleta.setFecha(cursor.getString(cursor.getColumnIndex(KEY_FECHA)));
+                        boleta.setHora(cursor.getString(cursor.getColumnIndex(KEY_HORA)));
+                        boleta.setSubtotal(cursor.getInt(cursor.getColumnIndex(KEY_BOLETA_SUBTOTAL)));
+                        boleta.setDescuento_total(cursor.getInt(cursor.getColumnIndex(KEY_DESCUENTOTOTAL)));
+                        boleta.setTotal(cursor.getInt(cursor.getColumnIndex(KEY_BOLETA_TOTAL)));
+                        boleta.setVisibilidad((cursor.getInt(cursor.getColumnIndex(KEY_BOLETA_VISIBILIDAD))));
+
+                        boletas.add(boleta);
+                    }
+                } else {
+                    Boleta boleta = new Boleta();
+
+                    boleta.setId_boleta(cursor.getInt(cursor.getColumnIndex(KEY_ID_BOLETA)));
+                    boleta.setFecha(cursor.getString(cursor.getColumnIndex(KEY_FECHA)));
+                    boleta.setHora(cursor.getString(cursor.getColumnIndex(KEY_HORA)));
+                    boleta.setSubtotal(cursor.getInt(cursor.getColumnIndex(KEY_BOLETA_SUBTOTAL)));
+                    boleta.setDescuento_total(cursor.getInt(cursor.getColumnIndex(KEY_DESCUENTOTOTAL)));
+                    boleta.setTotal(cursor.getInt(cursor.getColumnIndex(KEY_BOLETA_TOTAL)));
+                    boleta.setVisibilidad((cursor.getInt(cursor.getColumnIndex(KEY_BOLETA_VISIBILIDAD))));
+
+                    boletas.add(boleta);
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        BD.close();
+
+        return boletas;
+    }
+
+    public void agregarBoleta (Boleta boleta) {
+        SQLiteDatabase BD = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_FECHA, boleta.getFecha());
+        values.put(KEY_HORA, boleta.getHora());
+        values.put(KEY_BOLETA_SUBTOTAL, boleta.getSubtotal());
+        values.put(KEY_DESCUENTOTOTAL, boleta.getDescuento_total());
+        values.put(KEY_BOLETA_TOTAL, boleta.getTotal());
+        values.put(KEY_BOLETA_VISIBILIDAD, boleta.getVisibilidad());
+
+        BD.insert(TABLA_BOLETA, null, values);
+        BD.close();
+    }
 }
 
 

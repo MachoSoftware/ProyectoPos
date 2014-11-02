@@ -12,28 +12,15 @@ import java.util.ArrayList;
 
 /**
  * Created by NewOldDeilan on 09-10-2014.
- * <p/>
- * Adaptador de historial
- * Funciona con 2 listas de string:
- * - La información en si (values1)
- * - Lista indice con el parametro de visibilidad (listaVisibilidad)
- * <p/>
- * El list view trabaja con la lista indice de visibilidad para generar tantas views como
- * filas haya en la base de datos
- * <p/>
- * Luego el adaptador genera TextViews por cada campo de la base de datos, para eso
- * es la lista "values1"
  */
-public class AdaptadorHistorial<String> extends ArrayAdapter<String> {
+public class AdaptadorHistorial extends ArrayAdapter<Boleta> {
     private final Context context;
-    private final ArrayList<String> values1;
-    private final ArrayList<String> listaVisibilidad;
+    private final ArrayList<Boleta> listaBoletas;
 
-    public AdaptadorHistorial(Context context, ArrayList<String> values1, ArrayList<String> listaVisibilidad) {
-        super(context, R.layout.elemento_historial, listaVisibilidad);
+    public AdaptadorHistorial(Context context, ArrayList<Boleta> listaBoletas) {
+        super(context, R.layout.elemento_historial, listaBoletas);
         this.context = context;
-        this.values1 = values1;
-        this.listaVisibilidad = listaVisibilidad;
+        this.listaBoletas = listaBoletas;
     }
     //TESTasddas
     @Override
@@ -42,11 +29,6 @@ public class AdaptadorHistorial<String> extends ArrayAdapter<String> {
         //Colores para las boletas ocultas
         int colorFondo = Color.LTGRAY;
         Color colorFuente = new Color();
-
-        //Index para mostrar las información de la lista
-        int dataIndex = position;
-        if ((position * 6) + 5 < values1.size())
-            dataIndex *= 6;
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.elemento_historial, parent, false);
@@ -60,7 +42,7 @@ public class AdaptadorHistorial<String> extends ArrayAdapter<String> {
         TextView totalView = (TextView) rowView.findViewById(R.id.TotalView);
 
         //Marcar de color las boletas ocultas
-        if (Integer.parseInt(listaVisibilidad.get(position).toString()) == 0) {
+        if (listaBoletas.get(position).getVisibilidad() == 0) {
             idView.setBackgroundColor(colorFondo);
             fechaView.setBackgroundColor(colorFondo);
             horaView.setBackgroundColor(colorFondo);
@@ -70,12 +52,12 @@ public class AdaptadorHistorial<String> extends ArrayAdapter<String> {
         }
 
         //Setear el texto a todos los text views generados
-        idView.setText(values1.get(dataIndex).toString());
-        fechaView.setText(values1.get(dataIndex + 1).toString());
-        horaView.setText(values1.get(dataIndex + 2).toString());
-        subtotalView.setText(values1.get(dataIndex + 3).toString());
-        descuentoView.setText(values1.get(dataIndex + 4).toString());
-        totalView.setText(values1.get(dataIndex + 5).toString());
+        idView.setText(Integer.toString(listaBoletas.get(position).getId_boleta()));
+        fechaView.setText(listaBoletas.get(position).getFecha().toString());
+        horaView.setText(listaBoletas.get(position).getHora().toString());
+        subtotalView.setText(Integer.toString(listaBoletas.get(position).getSubtotal()));
+        descuentoView.setText(Integer.toString(listaBoletas.get(position).getDescuento_total()));
+        totalView.setText(Integer.toString(listaBoletas.get(position).getTotal()));
 
         return rowView;
     }
