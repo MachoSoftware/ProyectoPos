@@ -7,8 +7,8 @@ public class Categoria {
 
     private int Id_Categoria;
     private String nombre_categoria;
-    private int icono_categoria;
-    private int descripcion;
+    private String icono_categoria;
+    private String descripcion;
     private int visibilidad;
 
     public Categoria(){
@@ -31,19 +31,19 @@ public class Categoria {
         this.nombre_categoria = nombre_categoria;
     }
 
-    public int getIcono_categoria() {
+    public String getIcono_categoria() {
         return icono_categoria;
     }
 
-    public void setIcono_categoria(int icono_categoria) {
+    public void setIcono_categoria(String icono_categoria) {
         this.icono_categoria = icono_categoria;
     }
 
-    public int getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(int descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 

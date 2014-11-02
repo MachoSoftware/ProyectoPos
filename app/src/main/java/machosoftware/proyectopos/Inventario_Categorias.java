@@ -36,25 +36,13 @@ public class Inventario_Categorias extends Activity implements IConstantes{
      * Hace el query a la bd, seleccionando los nombres de la categoria.
      */
     private void refrescarLista(){
-        PosBaseDatos miBase = new PosBaseDatos(this, NOMBRE_BD, null, 1);
-        SQLiteDatabase db = miBase.getReadableDatabase();
-        Cursor c = db.rawQuery(" SELECT nombre FROM categoria", null);
-        //se instancia la lista de objetos de categoria
-        categorias = new ArrayList<Categoria>();
-        //Nos aseguramos de que existe al menos un registro...
-        if (c.moveToFirst()) {
-            //Recorremos el cursor hasta que no haya más registros
-            do {
+        PosBaseDatos miBase = new PosBaseDatos(getApplicationContext());
 
-                Categoria categ = new Categoria();
-                //obtenemos nombre de la categoria
-                categ.setNombre_categoria(c.getString(0));
-                //obtenemos icono de la categoria
-                //item.setIcono ??
-                //obtenemos otras cosas
-                //...
-                categorias.add(categ);
-            } while(c.moveToNext());
+        //se instancia la lista de objetos de categoria
+        categorias = miBase.obtenerCategorias();
+        //en caso de que falle hay que hacer algo....
+        if(categorias.isEmpty()){
+            System.out.println("Lista vacia!!!!!!!");
         }
 
         //creamos un array tipo string para que lo lea el Adaptador...
@@ -79,8 +67,7 @@ public class Inventario_Categorias extends Activity implements IConstantes{
             }
         };
         listView.setOnItemClickListener(mMessageClickedHandler);
-        //adapter.notifyDataSetChanged();
-        db.close();
+
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -49,7 +49,7 @@ public class Inventario_Items_ItemsAgregar extends Activity {
      * @param view
      */
     public void botonAgregarItemsAgregar(View view){
-
+        /*
         //se obtienen los EditText
         EditText editTextNombre = (EditText) findViewById(R.id.nombreItem);
         EditText editTextIcono = (EditText) findViewById(R.id.iconoItem);
@@ -76,6 +76,7 @@ public class Inventario_Items_ItemsAgregar extends Activity {
             //cierra esta ventana
             this.finish();
         }
+        */
 
     }
 

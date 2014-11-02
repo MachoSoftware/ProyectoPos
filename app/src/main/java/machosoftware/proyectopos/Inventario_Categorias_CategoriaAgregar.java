@@ -60,10 +60,11 @@ public class Inventario_Categorias_CategoriaAgregar extends Activity {
         //se sacan los string
         String stringNombre = editTextNombre.getText().toString();
         String stringIcono = editTextIcono.getText().toString();
+        String stringDescripcion = ".";
         //se obtiene el int para la db
         int intVisible;
         if(checkBoxCategoria.isChecked()){
-            intVisible =1;
+            intVisible = 1;
         }
         else {
             intVisible = 0;
@@ -76,9 +77,16 @@ public class Inventario_Categorias_CategoriaAgregar extends Activity {
         }
         else{
             //llamamos la base de datos
-            PosBaseDatos miBase = new PosBaseDatos(this, "primeraBD", null, 1);
-            //agregamos una categoria
-            miBase.agregarCategoria(stringNombre,stringIcono, intVisible);
+            PosBaseDatos miBase = new PosBaseDatos(getApplicationContext());
+            //instanciamos una categoria
+            Categoria nuevaCat = new Categoria();
+            nuevaCat.setNombre_categoria(stringNombre);
+            nuevaCat.setIcono_categoria(stringIcono);
+            nuevaCat.setDescripcion(stringDescripcion);
+            nuevaCat.setVisibilidad(intVisible);
+
+            //agregamos una categoria...
+            miBase.agregarCategoria(nuevaCat);
             //codigo para reuso en caso de que se quiera enviar informacion!
             //Intent intento = new Intent();
             //setResult(RESULT_OK,intento);
