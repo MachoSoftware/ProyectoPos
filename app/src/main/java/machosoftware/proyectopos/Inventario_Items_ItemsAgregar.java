@@ -5,12 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import machosoftware.proyectopos.PosBaseDatos;
-import machosoftware.proyectopos.R;
 
 /**
  * Agrega un Item a la bd.
@@ -49,7 +45,7 @@ public class Inventario_Items_ItemsAgregar extends Activity {
      * @param view
      */
     public void botonAgregarItemsAgregar(View view){
-        /*
+
         //se obtienen los EditText
         EditText editTextNombre = (EditText) findViewById(R.id.nombreItem);
         EditText editTextIcono = (EditText) findViewById(R.id.iconoItem);
@@ -58,7 +54,10 @@ public class Inventario_Items_ItemsAgregar extends Activity {
         String stringNombre = editTextNombre.getText().toString();
         String stringIcono = editTextIcono.getText().toString();
         //AGREGAR SPINNER Y OTRAS COSAS ACA
+        //... hacer popup!
 
+        //variable int auxiliar.. hasta que el arruya termine la wea....
+        int aux = 1;
 
         //verificamos que los string no sea vacio
         if(stringNombre.equals("") || stringIcono.equals("")){
@@ -67,17 +66,28 @@ public class Inventario_Items_ItemsAgregar extends Activity {
         }
         else{
             //llamamos la base de datos
-            PosBaseDatos miBase = new PosBaseDatos(this, "primeraBD", null, 1);
-            //agregamos una categoria
-            miBase.agregarItem();
-            //codigo para reuso en caso de que se quiera enviar informacion!
-            //Intent intento = new Intent();
-            //setResult(RESULT_OK,intento);
-            //cierra esta ventana
+            PosBaseDatos miBase = new PosBaseDatos(getApplicationContext());
+            //instanciamos un item
+            Item nuevoItem = new Item();
+            nuevoItem.setNombre_item(stringNombre);
+            nuevoItem.setIcono_item(stringIcono);
+            nuevoItem.setId_cat1(aux);
+            nuevoItem.setId_cat2(aux);
+            nuevoItem.setId_cat3(aux);
+            nuevoItem.setTipo(aux);
+            nuevoItem.setPrecio(aux);
+            nuevoItem.setStock_actual(aux);
+            nuevoItem.setStock_alerta(aux);
+            nuevoItem.setStock_optimo(aux);
+
+            //agregamos el item con los datos seteados
+            miBase.agregarItem(nuevoItem);
+                    //codigo para reuso en caso de que se quiera enviar informacion!
+                    //Intent intento = new Intent();
+                    //setResult(RESULT_OK,intento);
+                    //cierra esta ventana
             this.finish();
         }
-        */
-
     }
 
     /**

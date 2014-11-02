@@ -186,9 +186,12 @@ public class PosBaseDatos extends SQLiteOpenHelper {
 
 */
 
-   //  Funciones varias- CRUD(Create, Read, Update, Delete)
-    // agregar categoria
+    //  Funciones varias- CRUD(Create, Read, Update, Delete)
 
+    /**
+     * @brief Agrega una categoria a la base de datos.
+     * @param categoria Categoria que se agrega a la base de datos.
+     */
     public void agregarCategoria (Categoria categoria) {
         SQLiteDatabase BD = this.getWritableDatabase();
 
@@ -202,30 +205,100 @@ public class PosBaseDatos extends SQLiteOpenHelper {
         BD.insert(TABLA_CATEGORIA, null, values);
         BD.close(); // siempre cerrar la bd
     }
-     public ArrayList<Categoria> obtenerCategorias () {
-         ArrayList<Categoria> categorias = new ArrayList<Categoria>(); // array
-         String Query = "SELECT * FROM " + TABLA_CATEGORIA ; //  query para rescata all
 
-         Log.e(LOG, Query);
-         SQLiteDatabase BD = this.getReadableDatabase();
-         Cursor c = BD.rawQuery(Query, null);
+    /**
+     * @brief Se obtienen las categorias de la base de datos.
+     *
+     * Se obtiene un ArrayList de categorias de la base de datos.
+     *
+     * @return Retorna ArrayList<Categoria> con las categorias de la base de datos.
+     */
+    public ArrayList<Categoria> obtenerCategorias () {
+        ArrayList<Categoria> categorias = new ArrayList<Categoria>(); // array
+        String Query = "SELECT * FROM " + TABLA_CATEGORIA ; //  query para rescata all
+        Log.e(LOG, Query);
+        SQLiteDatabase BD = this.getReadableDatabase();
+        Cursor c = BD.rawQuery(Query, null);
+        // loop sobRE Cada respuesta
+        if (c.moveToFirst()){
+           do {
+               Categoria categoria = new Categoria();
+               categoria.setId_Categoria(c.getInt((c.getColumnIndex(KEY_ID_CATEGORIA))));
+               categoria.setNombre_categoria(c.getString((c.getColumnIndex(KEY_NOMBRE_CATEGORIA))));
+               categoria.setIcono_categoria(c.getString((c.getColumnIndex(KEY_ICONO_CATEGORIA))));
+               categoria.setDescripcion(c.getString((c.getColumnIndex(KEY_DESCRIPCION))));
+               categoria.setVisibilidad(c.getInt((c.getColumnIndex(KEY_CATEGORIA_VISIBILIDAD))));
+               categorias.add(categoria);
+           } while(c.moveToNext());
+        }
+        c.close();
+        BD.close();
+        return categorias;
+    }
 
-         // loop sobRE Cada respuesta
-         if (c.moveToFirst()){
+    /**
+     * @brief Agrega un item a la base de datos.
+     * @param item Item que se agrega a la base de datos.
+     */
+    public void agregarItem(Item item){
+
+        SQLiteDatabase BD = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID_CAT1, item.getId_cat1()); // Item categoria 1
+        values.put(KEY_ID_CAT2, item.getId_cat2()); // Item categoria 2
+        values.put(KEY_ID_CAT3, item.getId_cat3()); // Item categoria 3
+        values.put(KEY_NOMBRE_ITEM, item.getNombre_item()); // Item nombre
+        values.put(KEY_ICONO_ITEM, item.getIcono_item()); // Item icono
+        values.put(KEY_TIPO, item.getTipo()); // item tipo
+        values.put(KEY_PRECIO, item.getPrecio()); // item precio
+        values.put(KEY_STOCK_ACTUAL, item.getStock_actual()); // item stock actual
+        values.put(KEY_STOCK_OPTIMO, item.getStock_optimo()); // item stock optimo
+        values.put(KEY_STOCK_ALERTA, item.getStock_alerta()); // item stock alerta
+        // insert valores
+        BD.insert(TABLA_ITEM, null, values);
+        BD.close(); // siempre cerrar
+    }
+
+    /**
+     * @brief Se obtienen los items de la base de datos.
+     *
+     * Se obtiene un ArrayList de items de la base de datos.
+     *
+     * @return Retorna ArrayList<Item> con los items de la base de datos.
+     */
+    public ArrayList<Item> obtenerItems () {
+        ArrayList<Item> items = new ArrayList<Item>();// inicia array
+        String Query = "SELECT * FROM " + TABLA_ITEM; // Query rescatar todos los items
+        Log.e(LOG, Query);
+        SQLiteDatabase BD = this.getWritableDatabase();
+        Cursor c = BD.rawQuery(Query, null);
+
+        // loop sobre cada raw
+        if (c.moveToFirst()) {
             do {
-                Categoria categoria = new Categoria();
-                categoria.setId_Categoria(c.getInt((c.getColumnIndex(KEY_ID_CATEGORIA))));
-                categoria.setNombre_categoria(c.getString((c.getColumnIndex(KEY_NOMBRE_CATEGORIA))));
-                categoria.setIcono_categoria(c.getString((c.getColumnIndex(KEY_ICONO_CATEGORIA))));
-                categoria.setDescripcion(c.getString((c.getColumnIndex(KEY_DESCRIPCION))));
-                categoria.setVisibilidad(c.getInt((c.getColumnIndex(KEY_CATEGORIA_VISIBILIDAD))));
+                Item item = new Item();
+                item.setId_Item(c.getInt(c.getColumnIndex(KEY_ID_ITEM)));
+                item.setId_cat1(c.getInt(c.getColumnIndex(KEY_ID_CAT1)));
+                item.setId_cat2(c.getInt(c.getColumnIndex(KEY_ID_CAT2)));
+                item.setId_cat3(c.getInt(c.getColumnIndex(KEY_ID_CAT3)));
+                item.setNombre_item(c.getString(c.getColumnIndex(KEY_NOMBRE_ITEM)));
+                item.setIcono_item(c.getString(c.getColumnIndex(KEY_ICONO_ITEM)));
+                item.setTipo(c.getInt(c.getColumnIndex(KEY_TIPO)));
+                item.setPrecio(c.getInt(c.getColumnIndex(KEY_PRECIO)));
+                item.setStock_actual(c.getInt(c.getColumnIndex(KEY_STOCK_ACTUAL)));
+                item.setStock_optimo(c.getInt(c.getColumnIndex(KEY_STOCK_OPTIMO)));
+                item.setStock_alerta(c.getInt(c.getColumnIndex(KEY_STOCK_ALERTA)));
 
-                categorias.add(categoria);
+                items.add(item);
 
-            } while(c.moveToNext());
-         }
-         return categorias;
-     }
+
+            } while (c.moveToNext());
+
+        }
+        c.close();
+        BD.close();
+        return items;
+   }
 }
 
 

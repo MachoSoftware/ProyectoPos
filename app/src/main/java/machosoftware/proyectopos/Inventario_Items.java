@@ -17,6 +17,7 @@ import machosoftware.proyectopos.Interfaces.IConstantes;
 
 public class Inventario_Items extends Activity implements IConstantes {
 
+    //codigo arbitrario apra hacer respuestas... ahora no es necesario.
     private final int CODIGO_REQUEST = 25023;
 
     //Aqui pongo un arrayDinamico para poblar con items de la BD
@@ -26,54 +27,33 @@ public class Inventario_Items extends Activity implements IConstantes {
      * Hace el query a la bd, seleccionando los nombres del item.
      */
     private void refrescarLista(){
-/*
-        //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-        //ESTO VA A MORIR...
-        //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-        PosBaseDatos miBase = new PosBaseDatos(this, NOMBRE_BD, null, 1);
 
-        SQLiteDatabase db = miBase.getReadableDatabase();
-        //####################################################
-        //query no final, hay que esperar db de carlos!
-        Cursor c = db.rawQuery(" SELECT nombre FROM categoria", null);
-        //####################################################
-        //nuevo arraylist
-
+        //instancia bd
+        PosBaseDatos miBase = new PosBaseDatos(getApplicationContext());
+        //array de items
         productos = miBase.obtenerItems();
-        //Nos aseguramos de que existe al menos un registro...
-        if (c.moveToFirst()) {
-            //Recorremos el cursor hasta que no haya más registros
-            do {
-
-                Item item = new Item();
-                //obtenemos nombre del item
-                item.setNombre_item(c.getString(0));
-                //obtenemos icono del item
-                //item.setIcono ??
-                //obtenemos otras cosas
-                //...
-                productos.add(item);
-            } while(c.moveToNext());
+        if(productos.isEmpty()){
+            System.out.println("Productos vacía!");
         }
-        //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-        //fin morir
-        //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
         //creamos un array tipo string para que lo lea el Adaptador...
         String[] misArraysStrings = new String[productos.size()];
+
         //obtenemos cada string de nombres...
         for(int i=0; i< productos.size(); i++){
             misArraysStrings[i] = productos.get(i).getNombre_item();
         }
         //obtenemos cada codigo del icono
-        //for...
+        /***
+         * Aqui se debe hacer su for para obtener los codigos de los iconos a mostrar
+         * en el adaptador!
+         * Se hace de similar manera que arribita en "misArraysStrings"
+         */
 
         //aqui el adaptador crea la lista con las categorias usando el layout que se ha creado...
         AdaptadorItems<String> adapter = new AdaptadorItems<String>(this, misArraysStrings);
         ListView listView = (ListView) findViewById(R.id.listaItems);
         listView.setAdapter(adapter);
-        db.close();
-        */
     }
 
     @Override

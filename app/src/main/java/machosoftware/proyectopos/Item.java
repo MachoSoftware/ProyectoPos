@@ -12,10 +12,10 @@ public class Item {
     private int Id_cat2;
     private int Id_cat3;
     private String nombre_item;
-    private int icono_item;
+    private String icono_item;
     private int tipo;
-    private int tipo_especial;
-    private int tipo_precio;
+  //private int tipo_especial; <-- ya no va este!
+    private int precio;
     private int stock_actual;
     private int stock_optimo;
     private int stock_alerta;
@@ -25,7 +25,7 @@ public class Item {
 
     }
     //constructor para lista
-    public Item(int id_Item, String nombre, int iconoItem) {
+    public Item(int id_Item, String nombre, String iconoItem) {
         Id_Item = id_Item;
         this.nombre_item = nombre;
         this.icono_item = iconoItem;
@@ -71,11 +71,11 @@ public class Item {
         this.nombre_item = nombre_item;
     }
 
-    public int getIcono_item() {
+    public String getIcono_item() {
         return icono_item;
     }
 
-    public void setIcono_item(int icono_item) {
+    public void setIcono_item(String icono_item) {
         this.icono_item = icono_item;
     }
 
@@ -87,20 +87,13 @@ public class Item {
         this.tipo = tipo;
     }
 
-    public int getTipo_especial() {
-        return tipo_especial;
+
+    public int getPrecio() {
+        return precio;
     }
 
-    public void setTipo_especial(int tipo_especial) {
-        this.tipo_especial = tipo_especial;
-    }
-
-    public int getTipo_precio() {
-        return tipo_precio;
-    }
-
-    public void setTipo_precio(int tipo_precio) {
-        this.tipo_precio = tipo_precio;
+    public void setPrecio(int precio) {
+        this.precio = precio;
     }
 
     public int getStock_actual() {
